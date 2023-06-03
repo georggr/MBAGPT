@@ -5,7 +5,7 @@ import re
 bot_msg_container_html_template = '''
 <div style='background-color: #FFFFFF; padding: 10px; border-radius: 5px; margin-bottom: 10px; display: flex'>
     <div style="width: 20%; display: flex; justify-content: center">
-        <img src="https://cdn.freebiesupply.com/logos/large/2x/harvard-university-logo-svg-vector.svg" style="max-height: 50px; max-width: 50px; border-radius: 50%;">
+        <!-- <img src="https://cdn.freebiesupply.com/logos/large/2x/harvard-university-logo-svg-vector.svg" style="max-height: 50px; max-width: 50px; border-radius: 50%;"> -->
     </div>
     <div style="width: 80%;">
         $MSG
@@ -19,7 +19,7 @@ user_msg_container_html_template = '''
         $MSG
     </div>
     <div style="width: 20%; margin-left: auto; display: flex; justify-content: center;">
-        <img src="https://yt3.googleusercontent.com/dddKZKUsIKmDM0lrA5sDhgrvYBQKRtJzrJ-NtVM-aAznZpYCJ0wGYIvmvKL3_0uxbYLnRVEA=s176-c-k-c0x00ffffff-no-rj" style="max-width: 50px; max-height: 50px; float: right; border-radius: 50%;">
+        <!-- <img src="https://yt3.googleusercontent.com/dddKZKUsIKmDM0lrA5sDhgrvYBQKRtJzrJ-NtVM-aAznZpYCJ0wGYIvmvKL3_0uxbYLnRVEA=s176-c-k-c0x00ffffff-no-rj" style="max-width: 50px; max-height: 50px; float: right; border-radius: 50%;"> -->
     </div>    
 </div>
 '''
@@ -28,7 +28,7 @@ def render_article_preview(docs, tickers):
     message = f"<h5>Here are relevant articles for {tickers} that may answer your question. &nbsp; &nbsp;</h5>"
     message += "<div>"
     for d in docs:
-        elipse = " ".join(d[2].split(" ")[:140])        
+        elipse = " ".join(d[2].split(" ")[:140])
         message += f"<br><a href='{d[1]}'>{d[0]}</a></br>"
         message += f"<p>{elipse} ...</p>"
         message += "<br>"

@@ -2,6 +2,10 @@
 
 MBAGPT is a chat application that leverages the power of GPT-3.5-turbo to provide conversational responses with access to multiple data sources. It allows users to ask questions and receive answers from different knowledge bases (vectorDBs), such as Alex Hormozi, Warren Buffett and Richard Branson as well as answer general queries with the ChatGPT API as a fallback.
 
+## Youtube Video
+
+https://www.youtube.com/watch?v=Cxif86DoAog
+
 ## Features
 
 - Chat interface for interacting with the chatbot powered by GPT-3.5-turbo.
@@ -44,12 +48,12 @@ This script will create the Buffet and Branson vector databases by indexing the 
 5. Run the application:
 
 ```
-streamlit run app.py
+streamlit run app.py --server.port XXXX
 ```
 
 ## Usage
 
-1. Access the application by navigating to `http://localhost:8501` in your web browser.
+1. Access the application by navigating to `http://localhost:XXXX` (see above for the XXXX) in your web browser.
 
 2. Enter your prompt in the input box and press Enter.
 
