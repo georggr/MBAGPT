@@ -1,3 +1,55 @@
+'''
+This Python script creates a chat interface using the Streamlit library. It uses the OpenAI API to interact with a chatbot model named GPT-3.5-turbo, along with custom handlers to route questions to relevant data sources for context-specific answers.
+
+Here's a step-by-step explanation:
+
+1. **Imports**: The necessary libraries and modules are imported. This includes standard Python libraries like `os` for operating system operations, the OpenAI API library, Streamlit for creating an interactive UI, and some custom-defined modules for embeddings, vector stores, and utility functions.
+
+2. **Setting up OpenAI API**: The OpenAI API key is set up using Streamlit secrets.
+
+3. **UI header**: A header for the web application is set up using Streamlit.
+
+4. **Initializing embeddings**: The `OpenAIEmbeddings` object is initialized.
+
+5. **Loading Databases**: Two databases, "buffett" and "branson", are loaded into `Chroma` vector stores, each with its own retriever object. These databases contain embeddings of texts associated with Warren Buffett and Richard Branson respectively.
+
+6. **Session state initialization**: The history of the chat is stored in a Streamlit session state, which is initialized as an empty list if it doesn't already exist.
+
+7. **construct_messages()**: This function constructs formatted messages from the chat history. It ensures the total number of tokens in the messages doesn't exceed the model's limit.
+
+8. **Handler functions**: Four handler functions are defined: `hormozi_handler()`, `buffett_handler()`, `branson_handler()`, and `other_handler()`. Each handler deals with a specific category of user query, preparing the query and context and returning them in the appropriate format.
+
+9. **route_by_category()**: This function routes the user's query to the correct handler based on the category.
+
+10. **generate_response()**: This function generates a response to the user's query. It classifies the intent of the query, routes it based on its category, constructs a set of messages, ensures they fit the model's token limit, sends them to the API, retrieves the response, and appends the assistant's response to the chat history.
+
+11. **User Input**: A text input field is created for users to enter their prompts. When a new prompt is entered, the `generate_response()` function is triggered.
+
+12. **Displaying chat history**: The chat history is displayed in the Streamlit app. User messages and assistant responses are formatted using HTML templates and written out to the Streamlit interface.
+
+13. **User Input**: The Streamlit `text_input` function is used to create a user interface where the user can input their queries or prompts. The input field contains a placeholder text to guide the user. The `on_change` parameter is set to trigger the `generate_response()` function each time the user inputs a new query.
+
+14. **Displaying Chat History**: The script uses a for loop to iterate over the session state history and display the chat history. It differentiates between user and assistant messages and formats them differently using pre-defined HTML templates, with `st.write` displaying these messages in the Streamlit application. The `unsafe_allow_html` parameter allows the use of HTML within the message contents.
+
+Below is a breakdown of some of the more complex functions:
+
+**Handler Functions**: These functions (`hormozi_handler`, `buffett_handler`, `branson_handler`, `other_handler`) take a user query as input and prepare it for the chat model. They retrieve relevant documents or context based on the category of the query, format the query and context in the appropriate manner, and return the formatted message.
+
+- `hormozi_handler` performs a semantic search and formats the results.
+- `buffett_handler` and `branson_handler` retrieve relevant documents from the Buffett and Branson databases respectively, then prepare the context and format the message.
+- `other_handler` simply formats the query in the appropriate message format.
+
+**route_by_category()**: This function takes a user query and a category as input. Based on the category, it routes the query to the appropriate handler function and returns the result.
+
+**generate_response()**: This function manages the overall process of generating a response to the user's query. It appends the user's query to the chat history, classifies the intent of the query, routes the query to the appropriate handler function, constructs the set of messages to be sent to the chat model, ensures the total number of tokens doesn't exceed the model's limit, sends the messages to the OpenAI API, extracts the assistant's response, and appends the response to the chat history.
+
+In sum, this script uses Streamlit to create an interactive chat interface with a GPT-3.5-turbo chat model, providing context-specific responses by routing queries to relevant data sources.
+
+
+
+'''
+
+
 import os
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
