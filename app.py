@@ -96,7 +96,7 @@ def route_by_category(query, category):
     if category == "0":
         return hormozi_handler(query)
     elif category == "1":
-        return buffet_handler(query)
+        return buffett_handler(query)
     elif category == "2":
         return branson_handler(query)
     elif category == "3":
